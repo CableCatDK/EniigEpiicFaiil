@@ -65,15 +65,11 @@ fiberboks</a></li>
 om sikkerhedsproblemerne</a></li>
 </ul>
 </li>
-<li>Artikler p&aring; denne wiki
+<li>Filer på GitHub
 <ul>
-<li><a href="/Sikkerhedsproblemer_i_Icotera_i5800_fiberboks_fra_Bredb%C3%A5nd_Nord"
+<li><a href="https://github.com/CableCatDK/EniigEpiicFaiil/blob/master/Teknisk%20gennemgang%20af%20sikkerhedsproblemerne.html"
 title="Sikkerhedsproblemer i Icotera i5800 fiberboks fra Bredb&aring;nd Nord">Teknisk
 gennemgang af sikkerhedsproblemerne</a></li>
-<li><a href="/Fiber_setup_hos_Eniig_i_Aalborg" title=
-"Fiber setup hos Eniig i Aalborg">Fiber setup hos Eniig i Aalborg</a></li>
-<li><a href="/Sikker_anonym_email" title="Sikker anonym email">Sikker anonym
-email</a></li>
 </ul>
 </li>
 </ul>
