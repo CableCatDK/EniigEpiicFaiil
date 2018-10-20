@@ -50,11 +50,7 @@ overv&aring;gnings-kamera.</li>
 </ol>
 </li>
 </ol>
-<h2><span class="mw-headline" id="Eget_indhold">Eget indhold</span><span class=
-"mw-editsection"><span class="mw-editsection-bracket">[</span><a href=
-"/w/index.php?title=Sikkerhedsproblemer_hos_Eniig_Fiber&amp;action=edit&amp;section=1"
-title="Redig&eacute;r afsnit: Eget indhold">redig&eacute;r</a><span class=
-"mw-editsection-bracket">]</span></span></h2>
+<h2><span class="mw-headline" id="Eget_indhold">Eget indhold</span></h2>
 <ul>
 <li>Videoer p&aring; YouTube
 <ul>
@@ -73,11 +69,7 @@ gennemgang af sikkerhedsproblemerne</a></li>
 </ul>
 </li>
 </ul>
-<h2><span class="mw-headline" id="Links">Links</span><span class=
-"mw-editsection"><span class="mw-editsection-bracket">[</span><a href=
-"/w/index.php?title=Sikkerhedsproblemer_hos_Eniig_Fiber&amp;action=edit&amp;section=2"
-title="Redig&eacute;r afsnit: Links">redig&eacute;r</a><span class=
-"mw-editsection-bracket">]</span></span></h2>
+<h2><span class="mw-headline" id="Links">Links</span></h2>
 <ul>
 <li>Avisartikeler p&aring; Version2
 <ul>
